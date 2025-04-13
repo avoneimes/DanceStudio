@@ -39,7 +39,7 @@ const ClassForm = ({ onClassSaved, editData, clearEdit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
+        <form onSubmit={handleSubmit}>
             <input
                 placeholder="Title"
                 value={form.title}

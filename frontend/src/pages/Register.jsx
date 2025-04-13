@@ -11,7 +11,7 @@ const Register = () => {
         try {
             await API.post('/auth/register', form);
             alert('Registracija sėkminga! Dabar galite prisijungti.');
-            navigate('/login'); // 🔁 po registracijos -> login
+            navigate('/login');
         } catch (err) {
             alert('Klaida registruojantis');
             console.error(err);

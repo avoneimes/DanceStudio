@@ -12,9 +12,8 @@ const Login = () => {
         e.preventDefault();
         try {
             const res = await API.post('/auth/login', form);
-            // Paduodame user + token
             login({ ...res.data.user, token: res.data.token });
-            navigate('/classes'); // redirect to ClassList
+            navigate('/classes');
         } catch (err) {
             alert('Prisijungimo klaida');
             console.error('Prisijungimo klaida:', err);
@@ -23,6 +22,7 @@ const Login = () => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <h2>Prisijungimas</h2>
             <input
                 placeholder="Username"
                 value={form.username}

@@ -40,7 +40,13 @@ const ClassList = () => {
     return (
         <>
             <Navbar />
-            <div style={{ padding: '2rem' }}>
+            <div style={{
+                padding: '2rem',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'center'
+            }}>
                 <h1>Dance Classes</h1>
                 <ClassForm
                     onClassSaved={fetchClasses}
@@ -50,12 +56,7 @@ const ClassList = () => {
                 {classes.map(cls => (
                     <div
                         key={cls._id}
-                        style={{
-                            border: '1px solid white',
-                            margin: '1rem 0',
-                            padding: '1rem',
-                            textAlign: 'left'
-                        }}
+                        className="class-card"
                     >
                         <h2>{cls.title}</h2>
                         <p>{cls.description}</p>
