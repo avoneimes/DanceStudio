@@ -1,28 +1,26 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import API from '../api';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
 
-const Login = () => {
+const Register = () => {
     const [form, setForm] = useState({ username: '', password: '' });
-    const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await API.post('/auth/login', form);
-            // Paduodame user + token
-            login({ ...res.data.user, token: res.data.token });
-            navigate('/classes'); // redirect to ClassList
+            await API.post('/auth/register', form);
+            alert('Registracija sėkminga! Dabar galite prisijungti.');
+            navigate('/login'); // 🔁 po registracijos -> login
         } catch (err) {
-            alert('Prisijungimo klaida');
-            console.error('Prisijungimo klaida:', err);
+            alert('Klaida registruojantis');
+            console.error(err);
         }
     };
 
     return (
         <form onSubmit={handleSubmit}>
+            <h2>Registracija</h2>
             <input
                 placeholder="Username"
                 value={form.username}
@@ -34,9 +32,9 @@ const Login = () => {
                 value={form.password}
                 onChange={e => setForm({ ...form, password: e.target.value })}
             />
-            <button type="submit">Prisijungti</button>
+            <button type="submit">Register</button>
         </form>
     );
 };
 
-export default Login;
+export default Register;
