@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('express'); // Node.js require funkcija importuoja express biblioteka
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
