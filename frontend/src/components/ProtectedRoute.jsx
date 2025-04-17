@@ -3,11 +3,11 @@ import { AuthContext } from '../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-    const { user } = useContext(AuthContext);
+    const { user } = useContext(AuthContext); // ar prisijunges vartotojas
     if (!user) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/login" />; // jei ne, nukreipiama i login
     }
-    return children;
+    return children; // jei taip, rodomas puslapis
 };
 
 export default ProtectedRoute;

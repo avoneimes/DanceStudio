@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import API from '../api';
+import API from '../api'; // Axios instance arba fetch'inimo funkcija
 
 const ClassForm = ({ onClassSaved, editData, clearEdit }) => {
     const [form, setForm] = useState({
@@ -9,6 +9,7 @@ const ClassForm = ({ onClassSaved, editData, clearEdit }) => {
         schedule: '',
     });
 
+    // / Jei gauname klases redagavimo duomenis – uzpildome forma
     useEffect(() => {
         if (editData) {
             setForm(editData);
@@ -21,9 +22,11 @@ const ClassForm = ({ onClassSaved, editData, clearEdit }) => {
         e.preventDefault();
         try {
             if (editData) {
+                // PUT uzklausa – atnaujina esamą klase
                 await API.put(`/classes/${editData._id}`, form);
                 clearEdit();
             } else {
+                // POST uzklausa – sukuria naują klase
                 await API.post('/classes', form);
             }
             setForm({ title: '', description: '', instructor: '', schedule: '' });
@@ -33,6 +36,7 @@ const ClassForm = ({ onClassSaved, editData, clearEdit }) => {
         }
     };
 
+    // redagavimo atsaukimas
     const handleCancel = () => {
         setForm({ title: '', description: '', instructor: '', schedule: '' });
         clearEdit();

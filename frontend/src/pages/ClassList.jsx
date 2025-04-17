@@ -4,14 +4,14 @@ import ClassForm from '../components/ClassForm';
 import Navbar from '../components/Navbar';
 
 const ClassList = () => {
-    const [classes, setClasses] = useState([]);
+    const [classes, setClasses] = useState([]); // klases is duombazes
     const [editingClass, setEditingClass] = useState(null);
 
     useEffect(() => {
         fetchClasses();
     }, []);
 
-    const fetchClasses = async () => {
+    const fetchClasses = async () => { // uzklausa i API, gaunamos visos klases
         try {
             const res = await API.get('/classes');
             setClasses(res.data);
@@ -20,21 +20,24 @@ const ClassList = () => {
         }
     };
 
+    // nustato klase kuria norime redaguoti
     const handleEdit = (cls) => {
         setEditingClass(cls);
     };
 
+    // klases istrinimas
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this class?')) {
             try {
                 await API.delete(`/classes/${id}`);
-                fetchClasses();
+                fetchClasses(); // saraso atnaujinimas
             } catch (err) {
                 console.error('Klaida tryniant klasę:', err);
             }
         }
     };
 
+    // isvaloma redagavimo funkcija
     const clearEdit = () => setEditingClass(null);
 
     return (

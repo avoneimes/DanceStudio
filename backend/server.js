@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
+// nustatomi endpointai (marsrutai)
 const authRoutes = require('./routes/authRoutes');
 const classRoutes = require('./routes/classRoutes');
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/classes', classRoutes);
 
+// prisijungiama prie mongo dumobazes
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log('Connected to MongoDB');

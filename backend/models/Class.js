@@ -5,7 +5,7 @@ const classSchema = new mongoose.Schema({
     description: String,
     instructor: String,
     schedule: String,
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } // nuoroda i naudotojo ID, kuris ja sukure
 });
 
 module.exports = mongoose.model('Class', classSchema);

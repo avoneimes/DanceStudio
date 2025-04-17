@@ -1,18 +1,18 @@
-// src/pages/Schedule.jsx
 import React, { useEffect, useState } from 'react';
 import API from '../api';
 import Navbar from '../components/Navbar';
 
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const groupByDay = (classes) => {
+const groupByDay = (classes) => { // grupuoja klases pagal diena
     const grouped = {};
-    for (const day of daysOfWeek) {
+    for (const day of daysOfWeek) { // kiekviena savaites diena kaip tuscias masyvas
         grouped[day] = [];
     }
 
+    // kiekviena klase priskiriama i savo diena
     classes.forEach(cls => {
-        const day = cls.schedule.split(' ')[0]; // pvz. "Monday 18:00"
+        const day = cls.schedule.split(' ')[0]; // pvz. Monday 18:00
         if (grouped[day]) {
             grouped[day].push(cls);
         }
@@ -22,20 +22,21 @@ const groupByDay = (classes) => {
 };
 
 const Schedule = () => {
-    const [groupedClasses, setGroupedClasses] = useState({});
+    const [groupedClasses, setGroupedClasses] = useState({}); // klasiu grupavimas pagal dienas
 
     useEffect(() => {
         const fetchClasses = async () => {
             try {
+                // uzklausa i serveri gauti visas klases
                 const res = await API.get('/classes');
-                const grouped = groupByDay(res.data);
+                const grouped = groupByDay(res.data); // grupavimas pagal sav dienas
                 setGroupedClasses(grouped);
             } catch (err) {
                 console.error('Klaida gaunant tvarkaraštį:', err);
             }
         };
 
-        fetchClasses();
+        fetchClasses(); // duomenu uzkrovimas
     }, []);
 
     return (

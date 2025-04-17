@@ -12,7 +12,7 @@ const Login = () => {
         e.preventDefault();
         try {
             const res = await API.post('/auth/login', form);
-            login({ ...res.data.user, token: res.data.token });
+            login({ ...res.data.user, token: res.data.token }); // issaugomas vartotojas per authcontext
             navigate('/classes');
         } catch (err) {
             alert('Prisijungimo klaida');

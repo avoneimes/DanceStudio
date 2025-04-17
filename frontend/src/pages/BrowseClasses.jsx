@@ -21,6 +21,7 @@ const BrowseClasses = () => {
         }
     };
 
+    // filtravimas pagal pav, diena, instruktoriu
     const filteredClasses = classes
         .filter(cls =>
             cls.title.toLowerCase().includes(searchTerm.toLowerCase())
